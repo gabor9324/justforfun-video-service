@@ -13,8 +13,8 @@ import java.net.URL;
 @Service
 public class ImbdService {
 
-    private static final String HOST = "www.omdbapi.com";
-    private static final String API_KEY = "7fddfe85";
+    private static final String HOST = "api.themoviedb.org";
+    private static final String API_KEY = "bb505119114f4b415b8485826dfba596";
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String getImbdDetails(String title) throws URISyntaxException, MalformedURLException {
@@ -29,9 +29,10 @@ public class ImbdService {
         URIBuilder builder = new URIBuilder();
         builder.setScheme("http");
         builder.setHost(HOST);
-        builder.addParameter("apikey", API_KEY);
-        builder.addParameter("t", title);
-        builder.addParameter("plot", "full");
+        builder.setPath("/3/search/movie");
+        builder.addParameter("api_key", API_KEY);
+        builder.addParameter("query", title);
+        //builder.addParameter("plot", "full");
         URL url = builder.build().toURL();
 
         return url.toString();
