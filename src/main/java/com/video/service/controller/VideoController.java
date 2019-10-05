@@ -1,15 +1,16 @@
 package com.video.service.controller;
 
+import com.video.service.model.ImbdMovieListModel;
+import com.video.service.model.ImbdMovieModel;
+import com.video.service.model.api.ImbdMovieApiModel;
 import com.video.service.service.ImbdService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
@@ -19,8 +20,8 @@ public class VideoController {
     @Autowired
     private ImbdService imbdService;
 
-    @GetMapping("/")
-    public String getDemo(@RequestParam String title) throws MalformedURLException, URISyntaxException {
+    @GetMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ImbdMovieListModel getDemo(@RequestParam String title) throws MalformedURLException, URISyntaxException {
 
         return imbdService.getImbdDetails(title);
     }
