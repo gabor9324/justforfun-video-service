@@ -13,18 +13,28 @@ public class ImbdMovieModel {
     @JsonProperty("overview")
     private String overview;
 
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("posterPath")
+    private String posterPath;
+
     @JsonProperty("releaseDate")
     private LocalDate releaseDate;
 
-    private ImbdMovieModel(String title, String overview, LocalDate releaseDate) {
+    public ImbdMovieModel(String title, String overview, String id, String posterPath, LocalDate releaseDate) {
         this.title = title;
         this.overview = overview;
+        this.id = id;
+        this.posterPath = posterPath;
         this.releaseDate = releaseDate;
     }
 
     public static class Builder {
         private String title;
         private String overview;
+        private String id;
+        private String posterPath;
         private LocalDate releaseDate;
 
         public Builder withTitle(String title) {
@@ -37,13 +47,23 @@ public class ImbdMovieModel {
             return this;
         }
 
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPosterPath(String posterPath) {
+            this.posterPath = posterPath;
+            return this;
+        }
+
         public Builder withReleaseDate(LocalDate releaseDate) {
             this.releaseDate = releaseDate;
             return this;
         }
 
         public ImbdMovieModel build() {
-            return new ImbdMovieModel(title, overview, releaseDate);
+            return new ImbdMovieModel(title, overview, id, posterPath, releaseDate);
         }
     }
 
@@ -54,11 +74,13 @@ public class ImbdMovieModel {
         ImbdMovieModel that = (ImbdMovieModel) o;
         return Objects.equals(title, that.title) &&
                 Objects.equals(overview, that.overview) &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(posterPath, that.posterPath) &&
                 Objects.equals(releaseDate, that.releaseDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, overview, releaseDate);
+        return Objects.hash(title, overview, id, posterPath, releaseDate);
     }
 }
