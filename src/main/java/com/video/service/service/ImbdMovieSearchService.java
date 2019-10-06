@@ -57,8 +57,7 @@ public class ImbdMovieSearchService {
         builder.setPath("/search/movie");
         builder.addParameter("api_key", apiKey);
         builder.addParameter("query", title);
-        builder.addParameter("page", page + "");
-        //builder.addParameter("plot", "full");
+        builder.addParameter("page", String.valueOf(page));
         URL url = builder.build().toURL();
 
         return url.toString();
