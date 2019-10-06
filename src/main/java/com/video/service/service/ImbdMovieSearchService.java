@@ -17,11 +17,14 @@ import org.springframework.web.client.RestTemplate;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class ImbdService {
+public class ImbdMovieSearchService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImbdService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImbdMovieSearchService.class);
 
     @Value("${imbd_api_host}")
     private String host;
@@ -31,24 +34,30 @@ public class ImbdService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public ImbdMovieListModel getImbdDetails(String title) throws ImbdApiException {
+    public ImbdMovieListModel getImbdDetails(String title, int page) throws ImbdApiException {
+        return queryImbdDetails(title, page).createImbdMovieListModel();
+    }
+
+    private ImbdMovieListApiModel queryImbdDetails(String title, int page) throws ImbdApiException {
         try {
-            String url = generateUrl(title);
+            String url = generateUrl(title, page);
+            LOGGER.info("Called URL for {}:{}", title, url);
             ResponseEntity<ImbdMovieListApiModel> result = restTemplate.getForEntity(url, ImbdMovieListApiModel.class);
-            return result.getBody().createImbdMovieListModel();
+            return result.getBody();
         } catch (MalformedURLException | URISyntaxException | HttpClientErrorException ex) {
             LOGGER.error("Cannot execute the search: ", ex);
             throw new ImbdApiException("Cannot execute the search!");
         }
     }
 
-    private String generateUrl(String title) throws MalformedURLException, URISyntaxException {
+    private String generateUrl(String title, int page) throws MalformedURLException, URISyntaxException {
         URIBuilder builder = new URIBuilder();
         builder.setScheme("http");
         builder.setHost(host);
-        builder.setPath("/3/search/movie");
+        builder.setPath("/search/movie");
         builder.addParameter("api_key", apiKey);
         builder.addParameter("query", title);
+        builder.addParameter("page", page + "");
         //builder.addParameter("plot", "full");
         URL url = builder.build().toURL();
 

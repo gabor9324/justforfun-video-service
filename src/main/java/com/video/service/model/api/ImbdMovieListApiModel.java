@@ -13,6 +13,12 @@ public class ImbdMovieListApiModel {
     @JsonProperty("results")
     private List<ImbdMovieApiModel> results;
 
+    @JsonProperty("total_results")
+    private int numberOfResults;
+
+    @JsonProperty("total_pages")
+    private int numberOfPages;
+
     public ImbdMovieListModel createImbdMovieListModel() {
         List<ImbdMovieModel> imbdMovieModelList = results
                 .stream()
@@ -21,6 +27,8 @@ public class ImbdMovieListApiModel {
 
         ImbdMovieListModel.Builder builder = new ImbdMovieListModel.Builder();
         builder.withResults(imbdMovieModelList);
+        builder.withNumberOfResults(numberOfResults);
+        builder.withNumberOfPages(numberOfPages);
         return builder.build();
     }
 
@@ -29,11 +37,12 @@ public class ImbdMovieListApiModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ImbdMovieListApiModel that = (ImbdMovieListApiModel) o;
-        return Objects.equals(results, that.results);
+        return numberOfResults == that.numberOfResults &&
+                Objects.equals(results, that.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results);
+        return Objects.hash(results, numberOfResults);
     }
 }
