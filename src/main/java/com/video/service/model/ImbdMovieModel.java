@@ -2,6 +2,7 @@ package com.video.service.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ImbdMovieModel {
@@ -10,9 +11,9 @@ public class ImbdMovieModel {
     private String title;
 
     @JsonProperty("releaseDate")
-    private String releaseDate;
+    private LocalDate releaseDate;
 
-    private ImbdMovieModel(String title, String releaseDate) {
+    private ImbdMovieModel(String title, LocalDate releaseDate) {
         this.title = title;
         this.releaseDate = releaseDate;
     }
@@ -21,20 +22,20 @@ public class ImbdMovieModel {
         return title;
     }
 
-    public String getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
     public static class Builder {
         private String title;
-        private String releaseDate;
+        private LocalDate releaseDate;
 
         public Builder withTitle(String title) {
             this.title = title;
             return this;
         }
 
-        public Builder withReleaseDate(String releaseDate) {
+        public Builder withReleaseDate(LocalDate releaseDate) {
             this.releaseDate = releaseDate;
             return this;
         }

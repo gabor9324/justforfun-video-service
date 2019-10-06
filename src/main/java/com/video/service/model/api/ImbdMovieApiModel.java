@@ -3,6 +3,7 @@ package com.video.service.model.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.video.service.model.ImbdMovieModel;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ImbdMovieApiModel {
@@ -11,7 +12,7 @@ public class ImbdMovieApiModel {
     private String title;
 
     @JsonProperty("release_date")
-    private String releaseDate;
+    private LocalDate releaseDate;
 
     public ImbdMovieModel createImbdMovieModel() {
         ImbdMovieModel.Builder builder = new ImbdMovieModel.Builder();
