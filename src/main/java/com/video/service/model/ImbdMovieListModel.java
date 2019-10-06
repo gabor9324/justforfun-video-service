@@ -11,7 +11,7 @@ public class ImbdMovieListModel {
     @JsonProperty("results")
     private List<ImbdMovieModel> results;
 
-    public ImbdMovieListModel(List<ImbdMovieModel> results) {
+    private ImbdMovieListModel(List<ImbdMovieModel> results) {
         this.results = results;
     }
 

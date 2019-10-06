@@ -12,7 +12,7 @@ public class ImbdMovieModel {
     @JsonProperty("releaseDate")
     private String releaseDate;
 
-    public ImbdMovieModel(String title, String releaseDate) {
+    private ImbdMovieModel(String title, String releaseDate) {
         this.title = title;
         this.releaseDate = releaseDate;
     }
