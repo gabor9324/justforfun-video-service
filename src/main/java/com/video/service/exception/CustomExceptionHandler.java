@@ -16,4 +16,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<ErrorResponse> handleIllegalArgumentException(Exception ex) {
+        ErrorResponse error = new ErrorResponse(ex.getCause().getMessage());
+        return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
 }

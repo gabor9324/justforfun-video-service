@@ -2,8 +2,6 @@ package com.video.service.service;
 
 import com.video.service.exception.ImbdApiException;
 import com.video.service.model.ImbdMovieListModel;
-import com.video.service.model.ImbdMovieModel;
-import com.video.service.model.api.ImbdMovieApiModel;
 import com.video.service.model.api.ImbdMovieListApiModel;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
@@ -17,9 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ImbdMovieSearchService {
